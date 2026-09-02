@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "آئیکن فینس {{NUMBER}}"
+  },
+  "extensionDescription": {
+    "message": "Firefox ٹول بار پر آئیکن گروپس الگ کرنے کے لیے قابلِ حرکت فینس {{NUMBER}} شامل کرتا ہے۔"
+  },
+  "actionTitle": {
+    "message": "آئیکن فینس {{NUMBER}} — جدا کنندہ"
+  }
+}

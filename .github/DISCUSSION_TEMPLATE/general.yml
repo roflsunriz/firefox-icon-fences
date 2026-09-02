@@ -1,0 +1,11 @@
+title: "[General] "
+body:
+  - type: markdown
+    attributes:
+      value: Firefox Icon Fencesに関する話題を共有してください。
+  - type: textarea
+    id: topic
+    attributes:
+      label: 内容
+    validations:
+      required: true

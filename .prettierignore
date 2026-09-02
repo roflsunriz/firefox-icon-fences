@@ -1,0 +1,5 @@
+AGENTS.md
+COMMON-AGENTS.md
+dist/
+node_modules/
+package-lock.json

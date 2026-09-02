@@ -1,0 +1,14 @@
+enhancement:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "src/**"
+          - "config/**"
+          - "scripts/**"
+          - "package.json"
+          - "package-lock.json"
+          - ".github/workflows/**"
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.md"

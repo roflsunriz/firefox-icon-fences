@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "فاصل الأيقونات {{NUMBER}}"
+  },
+  "extensionDescription": {
+    "message": "يضيف الفاصل المتحرك {{NUMBER}} لفصل مجموعات الأيقونات في شريط أدوات Firefox."
+  },
+  "actionTitle": {
+    "message": "فاصل الأيقونات {{NUMBER}} — حاجز"
+  }
+}

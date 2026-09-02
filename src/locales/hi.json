@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "आइकन फ़ेंस {{NUMBER}}"
+  },
+  "extensionDescription": {
+    "message": "Firefox टूलबार पर आइकन समूहों को अलग करने के लिए चलायमान फ़ेंस {{NUMBER}} जोड़ता है।"
+  },
+  "actionTitle": {
+    "message": "आइकन फ़ेंस {{NUMBER}} — विभाजक"
+  }
+}

@@ -1,0 +1,39 @@
+name: Release signed extensions
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: npm run check
+      - name: Extract release notes and verify version
+        run: npm run release:notes -- "${{ github.ref_name }}" dist/release-notes.md
+      - name: Sign five unlisted extensions with Mozilla
+        run: npm run sign
+        env:
+          AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
+          AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+      - name: Verify signed artifacts
+        shell: bash
+        run: |
+          mapfile -t xpis < <(find dist/signed -maxdepth 1 -type f -name '*.xpi' -print)
+          test "${#xpis[@]}" -eq 5
+          for xpi in "${xpis[@]}"; do
+            unzip -l "$xpi" | grep -q 'META-INF/mozilla.rsa'
+          done
+      - name: Publish GitHub release
+        run: gh release create "${{ github.ref_name }}" dist/signed/*.xpi --verify-tag --title "${{ github.ref_name }}" --notes-file dist/release-notes.md
+        env:
+          GH_TOKEN: ${{ github.token }}

@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "アイコンフェンス {{NUMBER}}"
+  },
+  "extensionDescription": {
+    "message": "Firefoxのツールバーでアイコンのグループを区切る、移動可能なフェンス {{NUMBER}} を追加します。"
+  },
+  "actionTitle": {
+    "message": "アイコンフェンス {{NUMBER}} — 区切り"
+  }
+}

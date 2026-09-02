@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Разделитель значков {{NUMBER}}"
+  },
+  "extensionDescription": {
+    "message": "Добавляет перемещаемый разделитель {{NUMBER}} для групп значков на панели инструментов Firefox."
+  },
+  "actionTitle": {
+    "message": "Разделитель значков {{NUMBER}} — граница"
+  }
+}

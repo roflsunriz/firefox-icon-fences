@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 使い方の質問
+    url: https://github.com/roflsunriz/firefox-icon-fences/discussions/categories/q-a
+    about: 一般的な質問はDiscussionで受け付けます。
+  - name: セキュリティ問題
+    url: https://github.com/roflsunriz/firefox-icon-fences/security/advisories/new
+    about: 脆弱性は非公開で報告してください。

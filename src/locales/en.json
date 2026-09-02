@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Icon Fence {{NUMBER}}"
+  },
+  "extensionDescription": {
+    "message": "Adds movable fence {{NUMBER}} for separating groups of icons on the Firefox toolbar."
+  },
+  "actionTitle": {
+    "message": "Icon Fence {{NUMBER}} — separator"
+  }
+}

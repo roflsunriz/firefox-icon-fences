@@ -1,0 +1,23 @@
+name: ドキュメント改善
+description: 説明不足、誤記、分かりにくい手順を報告します
+title: "[Docs]: "
+labels:
+  - documentation
+body:
+  - type: input
+    id: location
+    attributes:
+      label: 対象箇所
+      placeholder: README.md のインストール手順
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 問題点
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 改善案

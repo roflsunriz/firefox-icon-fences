@@ -1,0 +1,27 @@
+{
+  "name": "firefox-icon-fences",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Firefoxのツールバーアイコンを5本のフェンスで整理する拡張機能セット",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "audit": "node scripts/audit.mjs",
+    "clean": "node scripts/clean.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "npm run build && node scripts/run-web-ext.mjs lint",
+    "package": "npm run build && node scripts/run-web-ext.mjs build",
+    "release:notes": "node scripts/release-notes.mjs",
+    "sign": "npm run build && node scripts/sign.mjs",
+    "test": "npm run build && node --test",
+    "check": "npm run format:check && npm run build && node --test && node scripts/run-web-ext.mjs lint && node scripts/run-web-ext.mjs build && npm run audit"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "prettier": "3.9.6",
+    "web-ext": "10.6.0"
+  }
+}

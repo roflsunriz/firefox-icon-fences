@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .fence {
+      fill: #3b3b3b;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .fence {
+        fill: #f2f2f2;
+      }
+    }
+  </style>
+  <rect class="fence" x="14.5" y="2" width="3" height="28" rx="1.5" />
+</svg>

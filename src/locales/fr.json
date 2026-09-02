@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Séparateur d’icônes {{NUMBER}}"
+  },
+  "extensionDescription": {
+    "message": "Ajoute le séparateur mobile {{NUMBER}} pour séparer les groupes d’icônes dans la barre d’outils de Firefox."
+  },
+  "actionTitle": {
+    "message": "Séparateur d’icônes {{NUMBER}} — séparation"
+  }
+}

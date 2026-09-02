@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "আইকন ফেন্স {{NUMBER}}"
+  },
+  "extensionDescription": {
+    "message": "Firefox টুলবারে আইকনের দল আলাদা করতে সরানো যায় এমন ফেন্স {{NUMBER}} যোগ করে।"
+  },
+  "actionTitle": {
+    "message": "আইকন ফেন্স {{NUMBER}} — বিভাজক"
+  }
+}

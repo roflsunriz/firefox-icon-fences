@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "图标分隔栏 {{NUMBER}}"
+  },
+  "extensionDescription": {
+    "message": "在 Firefox 工具栏中添加可移动的分隔栏 {{NUMBER}}，用于分隔图标组。"
+  },
+  "actionTitle": {
+    "message": "图标分隔栏 {{NUMBER}} — 分隔线"
+  }
+}

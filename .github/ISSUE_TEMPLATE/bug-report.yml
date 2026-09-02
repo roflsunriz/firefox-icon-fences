@@ -1,0 +1,50 @@
+name: 不具合報告
+description: フェンスの表示、配置、インストールに関する不具合を報告します
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: input
+    id: firefox-version
+    attributes:
+      label: Firefoxのバージョン
+      placeholder: "155.0"
+    validations:
+      required: true
+  - type: input
+    id: operating-system
+    attributes:
+      label: OS
+      placeholder: Windows 11 / macOS 15 / Ubuntu 24.04
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現手順
+      description: どの番号のフェンスで起きるかも記載してください。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待した結果
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 実際の結果
+    validations:
+      required: true
+  - type: dropdown
+    id: theme
+    attributes:
+      label: Firefoxテーマ
+      options:
+        - ライト
+        - ダーク
+        - システム
+        - その他
+    validations:
+      required: true

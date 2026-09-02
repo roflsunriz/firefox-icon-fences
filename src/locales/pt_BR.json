@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Divisor de ícones {{NUMBER}}"
+  },
+  "extensionDescription": {
+    "message": "Adiciona o divisor móvel {{NUMBER}} para separar grupos de ícones na barra de ferramentas do Firefox."
+  },
+  "actionTitle": {
+    "message": "Divisor de ícones {{NUMBER}} — separador"
+  }
+}

@@ -1,0 +1,16 @@
+title: "[Idea] "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 解決したいこと
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: アイデア
+    validations:
+      required: true

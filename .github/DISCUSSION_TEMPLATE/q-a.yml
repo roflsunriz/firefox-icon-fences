@@ -1,0 +1,11 @@
+title: "[Q&A] "
+labels:
+  - question
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: 質問
+      description: 試したことと、どこで困っているかを記載してください。
+    validations:
+      required: true

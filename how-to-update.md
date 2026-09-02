@@ -5,7 +5,7 @@
 - Node.js 22以降とnpm
 - GitHubリポジトリの書き込み権限
 - AMO（addons.mozilla.org）のJWT issuerとJWT secret
-- GitHub Actions Secrets `AMO_JWT_ISSUER` と `AMO_JWT_SECRET`
+- GitHub Actions Secrets `WEB_EXT_API_KEY` と `WEB_EXT_API_SECRET`
 
 ## 実装と検証
 

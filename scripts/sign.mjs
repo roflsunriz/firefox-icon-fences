@@ -9,11 +9,11 @@ import {
   webExtExecutable,
 } from "./project.mjs";
 
-const apiKey = process.env.AMO_JWT_ISSUER;
-const apiSecret = process.env.AMO_JWT_SECRET;
+const apiKey = process.env.WEB_EXT_API_KEY;
+const apiSecret = process.env.WEB_EXT_API_SECRET;
 if (!apiKey || !apiSecret) {
   throw new Error(
-    "AMO_JWT_ISSUER と AMO_JWT_SECRET の両方を環境変数へ設定してください。",
+    "WEB_EXT_API_KEY と WEB_EXT_API_SECRET の両方を環境変数へ設定してください。",
   );
 }
 

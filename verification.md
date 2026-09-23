@@ -44,3 +44,9 @@ GitHub Actionsのリリース実行では、以下も確認します。
 10. 5個を削除し、ツールバーからすべて消えることを確認します。
 
 実利用プロファイルで確認した場合は、検証後に不要な設定変更が残っていないことも確認します。
+
+## Dependabot 自動処理（2026-09-23）
+
+`.github/workflows/dependabot-automation.yml` を actionlint で検査し、PR 用 workflow 名（Quality）と一致することを確認する。Dependabot の patch／minor かつ全 PR チェック成功の場合だけ取り込み、major・古い SHA・再失敗は残す。
+
+実際の Dependabot PR がまだない場合、動作経路は未検証として扱う。実 PR 発生後に自動化ジョブ、CI の再試行、マージ結果を確認する。

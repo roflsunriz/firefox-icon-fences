@@ -42,3 +42,9 @@ git push origin vX.Y.Z
 - リリース前の不具合は修正コミットを追加し、同じタグを使い回さずバージョンを上げます。
 - 公開後に問題が判明した場合はReleaseへ注意事項を追記し、修正版を新しいバージョンとして署名・公開します。既存タグや署名済みXPIを置き換えません。
 - 利用者は `about:addons` から問題のあるフェンスを削除し、必要なら直前のReleaseのXPIを再インストールできます。
+
+## Dependabot PR の更新
+
+前提は `.github/dependabot.yml` と PR 用 CI（Quality）です。更新 PR の head SHA と `gh pr checks <PR番号>` の結果を確認してください。patch／minor は全チェック成功後に自動取り込みされます。初回 CI 失敗は failed jobs のみを 1 回再実行し、再失敗した PR は残して手動で修正します。
+
+設定を変えたときは `actionlint .github/workflows/dependabot-automation.yml` と実際の PR の Actions 結果を確認します。問題があれば呼び出し先の共通 workflow SHA を直前の検証済み値へ戻すコミットを push します。取り込まれた依存更新に問題があれば通常の revert コミットで復旧します。

@@ -21,7 +21,7 @@
     "node": ">=22"
   },
   "devDependencies": {
-    "prettier": "3.9.6",
-    "web-ext": "10.6.0"
+    "prettier": "3.9.8",
+    "web-ext": "10.7.0"
   }
 }

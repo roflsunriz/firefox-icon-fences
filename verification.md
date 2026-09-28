@@ -2,6 +2,10 @@
 
 ## 自動検証
 
+Prettierは3.9.9を使用します。依存更新時は `npm ci` 後に `npm run check` を実行し、`npm audit`を含む品質確認がすべて成功することを確認してください。
+
+2026-09-28時点で `npm ci` は `web-ext` 10.7.0 → `addons-linter` 10.13.0 が固定する ESLint 9.39.4 の非推奨警告を出します。両パッケージにそれより新しい公開版はなく、`npm audit` は脆弱性0件でした。互換性未確認のoverrideは加えず、上流の更新時に再確認します。
+
 ```powershell
 npm ci
 npm run check
@@ -21,6 +25,8 @@ npm run check
 `npm run audit` はnpmの脆弱性データベースを使って開発依存関係を監査し、検出された脆弱性が1件でもあれば失敗します。依存関係を更新した際は `npm run check` を実行し、監査を含む全項目が成功することを確認してください。
 
 GitHub ActionsのQuality workflowはDependabot自動化workflowもPrettierの対象に含めます。YAMLを変更した場合は `npm run format:check` を含む `npm run check` を実行します。
+
+2026-09-28のPrettier 3.9.9更新後は書式検査、生成ビルド、4件のNodeテスト、5拡張の `web-ext lint` とXPI生成、脆弱性監査が成功し、`npm outdated`は空でした。
 
 ## 署名済みXPIの確認
 

@@ -20,6 +20,8 @@ npm run check
 
 `npm run audit` はnpmの脆弱性データベースを使って開発依存関係を監査し、検出された脆弱性が1件でもあれば失敗します。依存関係を更新した際は `npm run check` を実行し、監査を含む全項目が成功することを確認してください。
 
+GitHub ActionsのQuality workflowはDependabot自動化workflowもPrettierの対象に含めます。YAMLを変更した場合は `npm run format:check` を含む `npm run check` を実行します。
+
 ## 署名済みXPIの確認
 
 GitHub Actionsのリリース実行では、以下も確認します。

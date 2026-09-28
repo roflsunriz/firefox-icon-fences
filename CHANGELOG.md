@@ -6,6 +6,7 @@
 
 ### Fixed
 
+- Quality workflowのPrettier検査がDependabot自動化workflowのYAML書式で失敗しないよう、文字列の引用形式を整形。
 - CI と Dependabot の分類の実行順が前後しても更新を取りこぼさないよう、同じ PR 番号と head SHA を再照合する経路を追加した。
 
 ### Changed

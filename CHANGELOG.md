@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+### Security
+
+- 修正可能なbrace-expansionの脆弱性を解消するため、親依存の互換範囲内でpackage-lockを更新した。node-forge由来の監査失敗は残る。
+
+- 失敗した依存監査を誤って成功扱いしないよう、node-forgeの修正版未公開とweb-extの必要な利用経路を検証記録へ明記した。
+
 ### Fixed
 
 - Quality workflowのPrettier検査がDependabot自動化workflowのYAML書式で失敗しないよう、文字列の引用形式を整形。

@@ -1,8 +1,8 @@
-name: ドキュメント改善
-description: 説明不足、誤記、分かりにくい手順を報告します
-title: '[Docs] '
+name: 機能提案
+description: 新しい機能や改善を、利用者の課題とともに提案します。
+title: '[Feature] '
 labels:
-  - documentation
+  - enhancement
 body:
   - type: markdown
     attributes:
@@ -11,28 +11,32 @@ body:
         Cookie、認証トークン、パスワード、個人情報を本文や添付に含めないでください。
         投稿前に[README](https://github.com/roflsunriz/firefox-icon-fences/blob/main/README.md)と[既存Issue](https://github.com/roflsunriz/firefox-icon-fences/issues)を確認してください。
         脆弱性の報告は[SECURITY.md](https://github.com/roflsunriz/firefox-icon-fences/blob/main/SECURITY.md)の案内に従ってください。
-  - type: input
-    id: location
-    attributes:
-      label: 対象文書・箇所
-      placeholder: README.md のインストール手順
-    validations:
-      required: true
   - type: textarea
     id: problem
     attributes:
-      label: 現在の記載と問題
+      label: 解決したい問題
+      description: 現在困っていることと、改善後に実現したい状態を記載してください。
     validations:
       required: true
   - type: textarea
-    id: suggestion
+    id: proposal
     attributes:
-      label: 期待する記載
+      label: 提案する変更
+      description: 期待する動作、画面や操作の案を記載してください。
+    validations:
+      required: true
   - type: textarea
-    id: additional-common
+    id: alternatives
+    attributes:
+      label: 代替案と互換性
+      description: 検討した別の方法、既存設定や利用方法への影響を記載してください。
+    validations:
+      required: false
+  - type: textarea
+    id: additional
     attributes:
       label: 補足
-      description: 根拠となる資料や、試した環境と結果を記載してください。
+      description: 参考資料、画面案、受け入れ条件などを記載してください。
     validations:
       required: false
   - type: checkboxes

@@ -1,16 +1,42 @@
-title: "[Idea] "
+title: '[Feature] '
 labels:
   - enhancement
 body:
+  - type: markdown
+    attributes:
+      value: |-
+        firefox-icon-fencesに関する内容を、目的と確認できた事実に分けて記載してください。
+        Cookie、認証トークン、パスワード、個人情報を本文や添付に含めないでください。
   - type: textarea
     id: problem
     attributes:
-      label: 解決したいこと
+      label: 解決したい問題
     validations:
       required: true
   - type: textarea
     id: idea
     attributes:
-      label: アイデア
+      label: 提案する変更
     validations:
       required: true
+  - type: textarea
+    id: alternatives-common
+    attributes:
+      label: 代替案と互換性
+      description: 検討した代替案、既存の設定や利用方法への影響を記載してください。
+    validations:
+      required: false
+  - type: textarea
+    id: additional-common
+    attributes:
+      label: 補足
+      description: 参考資料、画面案、受け入れ条件などを記載してください。
+    validations:
+      required: false
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 公開情報の確認
+      options:
+        - label: 本文と添付に秘密情報や個人情報が含まれていないことを確認しました。
+          required: true

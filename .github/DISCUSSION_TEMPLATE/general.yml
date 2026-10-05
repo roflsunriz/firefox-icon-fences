@@ -1,11 +1,30 @@
-title: "[General] "
+title: '[雑談] '
 body:
+  - type: markdown
+    attributes:
+      value: |-
+        firefox-icon-fencesに関する内容を、目的と確認できた事実に分けて記載してください。
+        Cookie、認証トークン、パスワード、個人情報を本文や添付に含めないでください。
   - type: markdown
     attributes:
       value: Firefox Icon Fencesに関する話題を共有してください。
   - type: textarea
     id: topic
     attributes:
-      label: 内容
+      label: 話題と背景
     validations:
       required: true
+  - type: textarea
+    id: additional-common
+    attributes:
+      label: 補足
+      description: 話題の背景、参考資料、期待する議論の結果を記載してください。
+    validations:
+      required: false
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 公開情報の確認
+      options:
+        - label: 本文と添付に秘密情報や個人情報が含まれていないことを確認しました。
+          required: true

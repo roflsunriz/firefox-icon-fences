@@ -1,6 +1,6 @@
 name: 機能提案
 description: 新しい機能や改善を、利用者の課題とともに提案します。
-title: '[Feature] '
+title: "[Feature] "
 labels:
   - enhancement
 body:

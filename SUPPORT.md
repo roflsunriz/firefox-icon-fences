@@ -8,7 +8,6 @@
 
 AMOには掲載しないため、AMO上のサポートページはありません。XPIはこのリポジトリのReleasesからのみ取得してください。
 
-
 ## 受付窓口
 
 - 不具合、機能提案、文書や設定の相談: [Issueの受付](https://github.com/roflsunriz/firefox-icon-fences/issues/new/choose)

@@ -12,7 +12,6 @@ IssueやPull Requestを歓迎します。変更前に既存Issueを確認し、�
 
 新しい権限、外部通信、データ収集、バックグラウンド処理は、このプロジェクトの目的に反するため追加しないでください。フェンス数や拡張機能IDを変える場合は、既存利用者の更新経路と署名履歴への影響をIssueで説明してください。
 
-
 ## 報告・提案の受付
 
 [Issueの受付](https://github.com/roflsunriz/firefox-icon-fences/issues/new/choose)から用途に合うフォームを選び、目的、対象と環境、確認できた結果を記載してください。Pull Requestには変更後の挙動、検証結果、未検証条件、互換性への影響を記載します。受付と秘密情報の扱いは[SUPPORT.md](SUPPORT.md)を参照してください。

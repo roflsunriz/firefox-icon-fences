@@ -1,6 +1,6 @@
 name: 不具合報告
 description: フェンスの表示、配置、インストールに関する不具合を報告します
-title: '[Bug] '
+title: "[Bug] "
 labels:
   - bug
 body:
@@ -24,7 +24,7 @@ body:
     id: firefox-version
     attributes:
       label: Firefoxのバージョン
-      placeholder: '155.0'
+      placeholder: "155.0"
     validations:
       required: true
   - type: input

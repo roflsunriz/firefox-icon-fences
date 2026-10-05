@@ -1,6 +1,6 @@
 name: ドキュメント改善
 description: 説明不足、誤記、分かりにくい手順を報告します
-title: '[Docs] '
+title: "[Docs] "
 labels:
   - documentation
 body:

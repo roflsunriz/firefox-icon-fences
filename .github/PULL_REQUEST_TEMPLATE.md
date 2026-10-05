@@ -14,7 +14,6 @@
 - [ ] 必要なFirefox Stableでの手動確認
 - [ ] 利用者向け変更を `CHANGELOG.md` に記載
 
-
 ## 関連Issue
 
 <!-- 該当するIssueへのリンクを記載してください。 -->

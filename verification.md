@@ -81,3 +81,4 @@ GitHub Actionsのリリース実行では、以下も確認します。
 - `npm update --ignore-scripts` でbrace-expansion 1.1.21、source-map-js 1.2.2など互換範囲内の推移依存を更新した。web-extがfx-runner 1.6.0を固定するため、`overrides.web-ext.fx-runner` に1.7.0を指定した。[Mozilla公式差分](https://github.com/mozilla/node-fx-runner/compare/1.6.0...1.7.0) で実装APIの変更がないことを確認し、shell-quote 1.11.0への更新でcriticalの指摘を解消した。監査抑制やweb-extの削除・降格は行わない。
 - 残る監査失敗はnode-forgeとその親依存adbkit、web-extの計3パッケージ（high）。上流修正版または依存経路を除去した公式版の公開後、依存を更新して `npm ci` と `npm run check` を再実行する。fx-runnerの上書きはweb-extが修正版を採用した時点で取り除く。
 - ローカルのNode.js 26.4.0／npm 11.17.0で `npm ci --ignore-scripts` と `npm run check` を実行した。書式、生成ビルド、4件のNodeテスト、5個の拡張lint（警告0件）と未署名XPI生成は成功し、最後の監査で上記3パッケージのhighを検出して失敗した。製品ソースや拡張機能の権限は変更していない。Mozillaへの署名申請とFirefoxへのインストールは今回の依存更新検証には含めない。
+- Prettier 3.9.10を含むPR #6の構成でも `npm ci` 後に同じ全検査を実行し、監査以外は成功した。`npm outdated --json` は空だった。通常の依存インストールは成功するが、上流が固定するESLint 9.39.4とwhatwg-encoding 3.1.1の非推奨警告は残る。

@@ -15,7 +15,9 @@
     "release:notes": "node scripts/release-notes.mjs",
     "sign": "npm run build && node scripts/sign.mjs",
     "test": "npm run build && node --test",
-    "check": "npm run format:check && npm run build && node --test && node scripts/run-web-ext.mjs lint && node scripts/run-web-ext.mjs build && npm run audit"
+    "check": "npm run format:check && npm run build && node --test && node scripts/run-web-ext.mjs lint && node scripts/run-web-ext.mjs build && npm run audit",
+    "postinstall": "node scripts/apply-node-forge-patch.mjs",
+    "test:node-forge": "node --test scripts/node-forge-regression.mjs"
   },
   "engines": {
     "node": ">=22"

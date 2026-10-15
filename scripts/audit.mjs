@@ -1,5 +1,10 @@
 import { spawnSync } from "node:child_process";
 import { readProject } from "./project.mjs";
+import {
+  advisoryUrl,
+  assertOnlyPatchedNpmAdvisory,
+  verifyPatchedForge,
+} from "./node-forge-security.mjs";
 
 const npmExecutable = process.env.npm_execpath;
 if (!npmExecutable) {
@@ -42,10 +47,22 @@ if (result.status !== 0 && vulnerabilities.length === 0) {
   throw new Error(`npm audit が終了コード ${result.status} で失敗しました。`);
 }
 
+verifyPatchedForge();
 if (vulnerabilities.length > 0) {
   process.stderr.write(result.stdout);
-  const packages = vulnerabilities.map(({ name }) => name).join(",");
-  throw new Error(`脆弱性を検出しました。packages=${packages}`);
+  assertOnlyPatchedNpmAdvisory(report);
 }
-
-console.log("npm audit: 脆弱性は検出されませんでした。");
+const regression = spawnSync(
+  process.execPath,
+  ["--test", "scripts/node-forge-regression.mjs"],
+  { encoding: "utf8" },
+);
+if (regression.error) throw regression.error;
+process.stdout.write(regression.stdout);
+process.stderr.write(regression.stderr);
+if (regression.status !== 0) throw new Error("node-forge regression failed");
+console.log(
+  vulnerabilities.length > 0
+    ? `${advisoryUrl}: reviewed patch identity and regression verified; raw advisory remains visible.`
+    : "No known dependency advisories; patch regression verified.",
+);

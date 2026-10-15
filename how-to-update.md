@@ -49,4 +49,6 @@ git push origin vX.Y.Z
 
 設定を変えたときは `actionlint .github/workflows/dependabot-automation.yml` と実際の PR の Actions 結果を確認します。問題があれば呼び出し先の共通 workflow SHA を直前の検証済み値へ戻すコミットを push します。取り込まれた依存更新に問題があれば通常の revert コミットで復旧します。
 
+依存監査が失敗した場合は `npm run audit` と `npm ls <対象パッケージ>` で依存経路を確認し、公式レジストリとAdvisoryの修正版を照合します。互換範囲内の更新は `npm update --ignore-scripts` で適用します。現在の上流制約と一時的な `overrides` の理由・解除条件は [verification.md](verification.md) を参照してください。修正版が未公開の場合も監査を無効化せず、失敗と残るリスクを記録します。
+
 CI 完了より Dependabot の分類が遅れる場合は、`callback_workflow_file` が指す呼び出し側 workflow を `workflow_dispatch` し、同じ PR 番号・head SHA・全チェックを再確認する。呼び出し側のファイル名を変える際はこの入力も一緒に更新する。

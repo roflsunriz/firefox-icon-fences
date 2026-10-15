@@ -2,7 +2,7 @@
 
 ## 自動検証
 
-Prettierは3.9.9を使用します。依存更新時は `npm ci` 後に `npm run check` を実行し、`npm audit`を含む品質確認がすべて成功することを確認してください。
+開発ツールのバージョンは `package.json` と `package-lock.json` を正本とします。依存更新時は `npm ci` 後に `npm run check` を実行し、`npm audit`を含む品質確認がすべて成功することを確認してください。
 
 2026-09-28時点で `npm ci` は `web-ext` 10.7.0 → `addons-linter` 10.13.0 が固定する ESLint 9.39.4 の非推奨警告を出します。両パッケージにそれより新しい公開版はなく、`npm audit` は脆弱性0件でした。互換性未確認のoverrideは加えず、上流の更新時に再確認します。
 
@@ -20,7 +20,7 @@ npm run check
 - SVGがライト／ダークテーマへ対応していること
 - `web-ext lint` が5個すべて警告なしで成功すること
 - 未署名の検証用XPIが5個生成できること
-- npm依存関係に既知の例外以外の脆弱性がないこと
+- npm依存関係に既知の脆弱性がないこと（監査の例外は設けない）
 
 `npm run audit` はnpmの脆弱性データベースを使って開発依存関係を監査し、検出された脆弱性が1件でもあれば失敗します。依存関係を更新した際は `npm run check` を実行し、監査を含む全項目が成功することを確認してください。
 
@@ -68,3 +68,17 @@ GitHub Actionsのリリース実行では、以下も確認します。
 - 既存の固有質問・入力例・必須条件を原文と照合。READMEのリンク・画像・コマンド・条件を確認し、裏付けがある誤記だけを訂正した。
 - 既存のCI、Dependabot、labeler、ライセンスのファイル内容は比較元から変更していない。
 - 製品のビルド・インストール・実機操作、GitHub上のフォーム表示、公開後CIは今回の静的検証に含めない。公開後に実際の受付表示と必要ラベルの適用を確認する。
+
+## 2026-10-05 マージ後CIの再監査
+
+旧文書PRは依存監査が失敗したheadでマージされ、mainでも監査が失敗した。現在の最新web-ext 10.7.0、adbkit 3.3.9、node-forge 1.4.0にも同じ経路が存在する。公式GitHub Advisoryは修正版なしと明記している: https://github.com/advisories/GHSA-86w9-cpqp-85rv 。監査抑制、チェック削除、古いweb-extへの強制降格は行わない。web-extのlint・XPI生成・Mozilla署名の利用経路を維持する。最小案はnode-forge修正版またはweb-ext/adbkitの依存除去版を待って更新し、監査と既存全チェックを再実行すること。
+
+`npm run check`の整形・ビルド・4件のテスト・5個の拡張lint/未署名XPI生成は成功し、監査だけが失敗する。brace-expansion警告は解消し、node-forgeに由来する3パッケージのhigh警告が残る。署名APIへの送信は行っていない。
+
+## 2026-10-15: Open PRの依存監査の再確認
+
+- npm公式レジストリと [GitHub Advisory](https://github.com/advisories/GHSA-86w9-cpqp-85rv) を再確認した。web-ext 10.7.0、adbkit 3.3.9、node-forge 1.4.0が引き続き最新公開版で、node-forgeの修正版は未公開。[上流の修正PR #1152](https://github.com/digitalbazaar/forge/pull/1152) も未マージであり、未採用の暗号処理修正を独自に取り込まない。
+- `npm update --ignore-scripts` でbrace-expansion 1.1.21、source-map-js 1.2.2など互換範囲内の推移依存を更新した。web-extがfx-runner 1.6.0を固定するため、`overrides.web-ext.fx-runner` に1.7.0を指定した。[Mozilla公式差分](https://github.com/mozilla/node-fx-runner/compare/1.6.0...1.7.0) で実装APIの変更がないことを確認し、shell-quote 1.11.0への更新でcriticalの指摘を解消した。監査抑制やweb-extの削除・降格は行わない。
+- 残る監査失敗はnode-forgeとその親依存adbkit、web-extの計3パッケージ（high）。上流修正版または依存経路を除去した公式版の公開後、依存を更新して `npm ci` と `npm run check` を再実行する。fx-runnerの上書きはweb-extが修正版を採用した時点で取り除く。
+- ローカルのNode.js 26.4.0／npm 11.17.0で `npm ci --ignore-scripts` と `npm run check` を実行した。書式、生成ビルド、4件のNodeテスト、5個の拡張lint（警告0件）と未署名XPI生成は成功し、最後の監査で上記3パッケージのhighを検出して失敗した。製品ソースや拡張機能の権限は変更していない。Mozillaへの署名申請とFirefoxへのインストールは今回の依存更新検証には含めない。
+- Prettier 3.9.10を含むPR #6の構成でも `npm ci` 後に同じ全検査を実行し、監査以外は成功した。`npm outdated --json` は空だった。通常の依存インストールは成功するが、上流が固定するESLint 9.39.4とwhatwg-encoding 3.1.1の非推奨警告は残る。

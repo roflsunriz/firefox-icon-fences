@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+### Security
+
+- 開発ツールの既知の脆弱性を減らすため、brace-expansionとsource-map-jsを互換範囲内で更新し、web-extが使うfx-runnerをMozilla公式の1.7.0へ上書きしてshell-quoteを1.11.0へ更新した。修正版未公開のnode-forgeに由来する監査失敗は残る。
+- 失敗した依存監査を誤って成功扱いしないよう、node-forgeの修正版未公開とweb-extの必要な利用経路を検証記録へ明記した。
+
 ### Fixed
 
 - Quality workflowのPrettier検査がDependabot自動化workflowのYAML書式で失敗しないよう、文字列の引用形式を整形。

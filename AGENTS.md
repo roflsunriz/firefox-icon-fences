@@ -17,3 +17,8 @@ Get-Content -Raw -LiteralPath .\COMMON-AGENTS.md
 - Firefox Web Extensionでアイコンを種類別に区切るためのFencesを5個作る
 - AMOで公開はしない
 - リリースでSigned Extensionを公開してFirefox Stableにインストール可能にする
+
+## 依存監査の上流制約（2026-10-15確認）
+
+- 最新web-ext 10.7.0はadbkit 3.3.9を介してnode-forge 1.4.0へ依存する。GHSA-86w9-cpqp-85rvは修正版未公開であり、監査成功扱いにしない。web-extはlint・XPI生成・Mozilla署名にも必要なので、監査回避のため削除しない。npm auditのweb-ext 5.1.0降格提案は現行機能の互換性が保証されないため採用しない。公式修正版または依存経路を除去した上流版を確認して更新し、全チェック後に取り込む。
+- web-extがfx-runner 1.6.0を固定しているため、`overrides.web-ext.fx-runner` でMozilla公式の1.7.0を指定し、shell-quoteの脆弱性を解消する。公式の1.6.0...1.7.0差分では実装APIの変更がなく、実行時依存の変更はshell-quote 1.11.0への更新だけ。web-ext更新時はこの固定が不要になったか確認する。詳細と根拠は `verification.md` を参照。

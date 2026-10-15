@@ -55,11 +55,7 @@ GitHub Actionsのリリース実行では、以下も確認します。
 
 ## Dependabot 自動処理（2026-09-23）
 
-`.github/workflows/dependabot-automation.yml` を actionlint で検査し、PR 用 workflow 名（Quality）と一致することを確認する。Dependabot の patch／minor かつ全 PR チェック成功の場合だけ取り込み、major・古い SHA・再失敗は残す。
-
-実際の Dependabot PR がまだない場合、動作経路は未検証として扱う。実 PR 発生後に自動化ジョブ、CI の再試行、マージ結果を確認する。
-
-大量の Dependabot PR により CI 完了より分類が遅れる場合でも、分類後の `workflow_dispatch` が現在の PR 番号と head SHA を照合して再評価する。別の作成者、古い SHA、未完了の CI はマージしない。
+詳細は [findings.md](findings.md#verification-1) に移しました。
 
 ## 2026-10-05: GitHub受付・READMEの整備（公開前）
 
@@ -82,3 +78,12 @@ GitHub Actionsのリリース実行では、以下も確認します。
 - 残る監査失敗はnode-forgeとその親依存adbkit、web-extの計3パッケージ（high）。上流修正版または依存経路を除去した公式版の公開後、依存を更新して `npm ci` と `npm run check` を再実行する。fx-runnerの上書きはweb-extが修正版を採用した時点で取り除く。
 - ローカルのNode.js 26.4.0／npm 11.17.0で `npm ci --ignore-scripts` と `npm run check` を実行した。書式、生成ビルド、4件のNodeテスト、5個の拡張lint（警告0件）と未署名XPI生成は成功し、最後の監査で上記3パッケージのhighを検出して失敗した。製品ソースや拡張機能の権限は変更していない。Mozillaへの署名申請とFirefoxへのインストールは今回の依存更新検証には含めない。
 - Prettier 3.9.10を含むPR #6の構成でも `npm ci` 後に同じ全検査を実行し、監査以外は成功した。`npm outdated --json` は空だった。通常の依存インストールは成功するが、上流が固定するESLint 9.39.4とwhatwg-encoding 3.1.1の非推奨警告は残る。
+
+## 2026-10-16: findings.mdへの知見分離
+
+- 目的: 共通指針に合わせ、AGENTSの行動指示と利用者向けREADMEから、開発内部の実現手段・例外の条件・再利用する調査知見をfindings.mdへ分離した。移動した本文の条件・確認日・未検証の留保を保持した。
+- 元文書との本文照合、Markdownの相対リンク・見出しアンカーの検査、git diff --checkを実施し、新たなリンク不整合と空白エラーは0件。AGENTSの一般的な指示は内容を保って再編し、findings全文必読・禁止と承認条件を確認した。
+- GitHubの既存Dependabot警告を読み取り、Open PRも確認した（作業開始時Open PR 0件、Open警告 1件）。GitHubの警告なしを全依存の安全保証や実機動作の検証とは扱わない。
+- ローカル監査はGHSA-86w9-cpqp-85rv（node-forge 1.4.0）を検出して失敗した。公式npmメタデータでnode-forge 1.4.0、adbkit 3.3.9、web-ext 10.8.0の依存経路を確認した。上流最新版も影響を受け、安全な公式修正版がないため、監査の抑制・無関係な降格・独自暗号パッチは加えていない。修正版公開後の再監査が必要。詳細はfindings.mdの再確認節を参照する。
+- npm run checkは書式、生成ビルド、Nodeテスト4件、5拡張のweb-ext lint（警告0件）と未署名XPI生成まで通過し、最後の監査でhigh 3パッケージを検出して失敗した。署名申請・インストールは実施していない。
+- 文書移動と参照整理では製品の実行時ロジックを変更していない。実機書換え、認証操作、外部サービスへの投稿・署名・リリースは実施せず、これらの動作が再検証済みであるとは扱わない。

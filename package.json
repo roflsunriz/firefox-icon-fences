@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "prettier": "3.9.10",
-    "web-ext": "10.7.0"
+    "web-ext": "10.8.0"
   },
   "overrides": {
     "web-ext": {

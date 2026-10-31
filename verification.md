@@ -1,8 +1,14 @@
 # 検証手順
 
+## 2026-10-31: Dependabot 更新と依存監査
+
+- web-ext 10.8.0 が fx-runner 1.7.0 を直接指定するため override を除いた。node-forge は公開修正版 1.4.2 に更新し、正常な署名構造の受理と不正な要素の拒否を確認した。
+- deepmerge 4.3.1 の限定パッチと攻撃回帰、minimatch 3.1.5 のソース・非増幅を検証する。raw監査は2件とその依存経路を表示し、未知の警告や検証の不一致は拒否する。
+- `npm run check` で整形、生成、回帰テスト、5拡張の `web-ext lint` と未署名XPI生成が成功した。隔離したheadless Firefoxの一時プロファイルでも5個すべてを一時インストールし、有効化を確認した。署名済みXPIの配布とツールバー配置の手動操作は実施していない。
+
 ## 自動検証
 
-開発ツールのバージョンは `package.json` と `package-lock.json` を正本とします。依存更新時は `npm ci` 後に `npm run check` を実行し、`npm audit`を含む品質確認がすべて成功することを確認してください。
+開発ツールのバージョンは `package.json` と `package-lock.json` を正本とします。依存更新時は `npm ci` 後に `npm run check` を実行し、限定パッチと監査判定を含む品質確認がすべて成功することを確認してください。
 
 2026-09-28時点で `npm ci` は `web-ext` 10.7.0 → `addons-linter` 10.13.0 が固定する ESLint 9.39.4 の非推奨警告を出します。両パッケージにそれより新しい公開版はなく、`npm audit` は脆弱性0件でした。互換性未確認のoverrideは加えず、上流の更新時に再確認します。
 
@@ -20,9 +26,9 @@ npm run check
 - SVGがライト／ダークテーマへ対応していること
 - `web-ext lint` が5個すべて警告なしで成功すること
 - 未署名の検証用XPIが5個生成できること
-- npm依存関係に既知の脆弱性がないこと（監査の例外は設けない）
+- raw監査結果を表示し、検証済みのdeepmerge・minimatchの対象2件以外に警告がないこと
 
-`npm run audit` はnpmの脆弱性データベースを使って開発依存関係を監査し、検出された脆弱性が1件でもあれば失敗します。依存関係を更新した際は `npm run check` を実行し、監査を含む全項目が成功することを確認してください。
+`npm run audit` はnpmの脆弱性データベースを使い、deepmergeのパッチと攻撃回帰、minimatch 3の実装と非増幅を確認して対象2件を限定判定します。未知の警告・版やハッシュの変化・監査の実行失敗は拒否します。
 
 GitHub ActionsのQuality workflowはDependabot自動化workflowもPrettierの対象に含めます。YAMLを変更した場合は `npm run format:check` を含む `npm run check` を実行します。
 

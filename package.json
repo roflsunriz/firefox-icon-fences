@@ -16,7 +16,7 @@
     "sign": "npm run build && node scripts/sign.mjs",
     "test": "npm run build && node --test",
     "check": "npm run format:check && npm run build && node --test && node scripts/run-web-ext.mjs lint && node scripts/run-web-ext.mjs build && npm run audit",
-    "postinstall": "node scripts/apply-node-forge-patch.mjs",
+    "postinstall": "node scripts/apply-deepmerge-patch.mjs",
     "test:node-forge": "node --test scripts/node-forge-regression.mjs"
   },
   "engines": {
@@ -27,8 +27,6 @@
     "web-ext": "10.8.0"
   },
   "overrides": {
-    "web-ext": {
-      "fx-runner": "1.7.0"
-    }
+    "node-forge": "1.4.2"
   }
 }

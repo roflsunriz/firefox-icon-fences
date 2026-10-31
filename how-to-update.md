@@ -19,6 +19,8 @@ npm ci
 npm run check
 ```
 
+node-forge は公開修正版 1.4.2 を使用します。deepmerge 4.3.1 は公開修正版が出るまで `npm ci` の postinstall で限定パッチを適用します。監査はパッチと実ファイルのハッシュ、攻撃回帰、minimatch 3 の実装と非増幅を確認し、対象の警告を表示します。未知の警告や版・検証の不一致は失敗します。`--ignore-scripts` ではパッチが適用されません。
+
 5. [verification.md](verification.md) の手動確認を行います。
 
 ## リリース
@@ -44,8 +46,6 @@ git push origin vX.Y.Z
 - 利用者は `about:addons` から問題のあるフェンスを削除し、必要なら直前のReleaseのXPIを再インストールできます。
 
 ## Dependabot PR の更新
-
-
 
 Dependabot version update は毎月28日00:00、検証済み PR の自動マージは同日18:00（いずれも `Asia/Tokyo`）にまとめます。28日より前に自動マージせず、現在の head SHA と全 PR チェックを月末処理で再確認します。
 詳細は [findings.md](findings.md#update-1) に移しました。

@@ -38,6 +38,15 @@ export function validateAuditReport(report, status) {
         );
       } else {
         assert.equal(cause?.name, name, `unexpected direct advisory: ${name}`);
+        assert.ok(
+          Object.hasOwn(allowed, name),
+          `unhandled direct advisory: ${name}`,
+        );
+        assert.equal(
+          typeof cause?.url,
+          "string",
+          `invalid advisory URL: ${name}`,
+        );
         assert.equal(cause?.url, allowed[name], `unhandled advisory: ${name}`);
         assert.equal(entry.via.length, 1, `multiple advisories: ${name}`);
       }
@@ -61,4 +70,25 @@ export function validateAuditReport(report, status) {
       `advisory has no verified root: ${name}`,
     );
   }
+}
+
+export function verifyDeepmergeLayout(lock) {
+  assert.ok(
+    lock?.packages &&
+      typeof lock.packages === "object" &&
+      !Array.isArray(lock.packages),
+  );
+  const entries = Object.entries(lock.packages).filter(
+    ([path, entry]) =>
+      /(^|\/)node_modules\/deepmerge$/.test(path) ||
+      entry?.name === "deepmerge" ||
+      (typeof entry?.resolved === "string" &&
+        /\/deepmerge\/-\/deepmerge-/.test(entry.resolved)),
+  );
+  assert.deepEqual(
+    entries.map(([path]) => path),
+    ["node_modules/deepmerge"],
+    "unreviewed deepmerge installation",
+  );
+  assert.equal(entries[0][1]?.version, "4.3.1", "unreviewed deepmerge version");
 }

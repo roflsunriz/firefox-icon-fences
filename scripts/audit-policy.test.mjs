@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { allowed, validateAuditReport } from "./audit-policy.mjs";
+import {
+  allowed,
+  validateAuditReport,
+  verifyDeepmergeLayout,
+} from "./audit-policy.mjs";
 
 const fixture = () => ({
   vulnerabilities: {
@@ -34,6 +38,13 @@ test("audit allows only verified leaves and checks cyclic parent chains", () => 
   const unknownParent = fixture();
   unknownParent.vulnerabilities.eslint.via.push("unknown");
   assert.throws(() => validateAuditReport(unknownParent, 1));
+  const missingUrl = fixture();
+  missingUrl.vulnerabilities.other = {
+    name: "other",
+    via: [{ name: "other" }],
+  };
+  missingUrl.metadata.vulnerabilities.total++;
+  assert.throws(() => validateAuditReport(missingUrl, 1));
   const wrongUrl = fixture();
   wrongUrl.vulnerabilities.minimatch.via[0].url =
     "https://example.invalid/unknown";
@@ -43,4 +54,33 @@ test("audit allows only verified leaves and checks cyclic parent chains", () => 
   assert.throws(() => validateAuditReport(cyclic, 1));
   assert.throws(() => validateAuditReport(fixture(), 0));
   assert.throws(() => validateAuditReport(fixture(), 2));
+});
+
+test("all locked deepmerge installations must be reviewed", () => {
+  const known = {
+    packages: { "node_modules/deepmerge": { version: "4.3.1" } },
+  };
+  assert.doesNotThrow(() => verifyDeepmergeLayout(known));
+  assert.throws(() => verifyDeepmergeLayout({ packages: {} }));
+  assert.throws(() =>
+    verifyDeepmergeLayout({
+      packages: {
+        ...known.packages,
+        "node_modules/alias": { name: "deepmerge", version: "4.3.1" },
+      },
+    }),
+  );
+  assert.throws(() =>
+    verifyDeepmergeLayout({
+      packages: { "node_modules/deepmerge": { version: "5.0.0" } },
+    }),
+  );
+  assert.throws(() =>
+    verifyDeepmergeLayout({
+      packages: {
+        ...known.packages,
+        "node_modules/other/node_modules/deepmerge": { version: "4.3.1" },
+      },
+    }),
+  );
 });

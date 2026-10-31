@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { join } from "node:path";
 import { readProject } from "./project.mjs";
-import { validateAuditReport } from "./audit-policy.mjs";
+import { validateAuditReport, verifyDeepmergeLayout } from "./audit-policy.mjs";
 import { sha256, verifyDeepmerge } from "./deepmerge-security.mjs";
 
 const npmExecutable = process.env.npm_execpath;
@@ -30,6 +30,7 @@ assert.equal(
   "1.4.2",
 );
 const lock = JSON.parse(readFileSync("package-lock.json", "utf8"));
+verifyDeepmergeLayout(lock);
 const minimatches = Object.entries(lock.packages).filter(([path]) =>
   /(^|\/)node_modules\/minimatch$/.test(path),
 );

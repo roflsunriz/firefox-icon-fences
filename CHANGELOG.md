@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- READMEでfindings.mdへの案内に置き換わっていた本文を復元し、構成・開発・検証の説明をREADMEから直接読めるようにした。移動後のREADME更新は保持した。
+
+
 ### Security
 
 - 依存監査で deepmerge の全配置を照合し、未検証の追加コピーや異なる版、未知の不正な勧告を拒否するようにした。

@@ -29,7 +29,16 @@ Firefoxのツールバーに5本の移動可能な縦線を追加し、拡張機
 
 ## 開発
 
-詳細は [findings.md](findings.md#readme-1) に移しました。
+Node.js 22以降が必要です。
+
+```powershell
+npm ci
+npm run check
+```
+
+`npm run build` は5個の拡張機能ソースを `dist/extensions` に生成し、`npm run package` は未署名の検証用XPIを `dist/unsigned` に生成します。Firefox Stableへ恒久的にインストールできる配布物は、GitHub ActionsがMozilla Add-ons APIで署名したRelease上のXPIだけです。
+
+詳しい更新・リリース方法は [how-to-update.md](how-to-update.md)、検証方法は [verification.md](verification.md) を参照してください。
 
 ## ライセンス
 
@@ -37,4 +46,6 @@ Firefoxのツールバーに5本の移動可能な縦線を追加し、拡張機
 
 ## 依存更新の自動処理
 
-詳細は [findings.md](findings.md#readme-2) に移しました。
+更新PRの取り込みは、必要なCIチェックにすべて成功したものだけを対象に、毎月28日18:00（Asia/Tokyo）の月末処理で行います。
+
+Dependabot は対象の依存関係を毎月28日00:00（Asia/Tokyo）に確認します。patch／minor 更新は PR のチェック（Quality）が成功した後に自動で squash merge されます。CI の失敗ジョブは 1 回だけ再実行します。再失敗した PR は残して手動で修正します。major 更新も互換性を確認し、同じ月末処理で取り込みます。
